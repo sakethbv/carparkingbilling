@@ -12,7 +12,6 @@ import (
 
 func CreateKafkaConsumer(DB *gorm.DB, Broker, Group, Topic string) error {
 	//Creating kafka consumer
-	//Kafkabrokers := strings.Split(Brokers, ",")
 	c, err := kafka.NewConsumer(&kafka.ConfigMap{
 		"bootstrap.servers": Broker,
 		"group.id":          Group,
