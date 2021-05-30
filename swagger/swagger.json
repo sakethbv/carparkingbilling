@@ -1,0 +1,125 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a car parking billing server which gives the parking time and amount to be paid for a car parking slot",
+    "version": "0.0.1",
+    "title": "Car Parking APIs",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "name": "Car Parking Billing API Support",
+      "email": "saketh.bv09@gmail.com"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "localhost:8000",
+  "basePath": "/s1",
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/parkingtime": {
+      "get": {
+        "tags": [
+          "car parking"
+        ],
+        "summary": "Get the amount of time for which a car is parked based on parkingId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parkingId",
+            "in": "query",
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the amount of time for which a car is parked",
+            "schema": {
+              "$ref": "#/definitions/ParkingTime"
+            }
+          },
+          "400": {
+            "description": "Invalid parkingId supplied"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/parkingamount": {
+      "get": {
+        "tags": [
+          "car parking"
+        ],
+        "summary": "Get the amount to be paid for a parking slot based on duration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parkingId",
+            "in": "query",
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the amount to be paid for a parking slot based on duration",
+            "schema": {
+              "$ref": "#/definitions/ParkingAmount"
+            }
+          },
+          "400": {
+            "description": "Invalid parkingId supplied"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ParkingTime": {
+      "type": "object",
+      "properties": {
+        "parkingId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "parkedTime": {
+          "type": "string"
+        }
+      }
+    },
+    "ParkingAmount": {
+      "type": "object",
+      "properties": {
+        "parkingId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "parkingAmount": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}
