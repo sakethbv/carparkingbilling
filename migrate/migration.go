@@ -16,7 +16,7 @@ type ParkingData struct {
 	TsCreated   time.Time `gorm:"column:tscreated" json:"tsCreated,omitempty"`
 }
 
-//TableName function for orders
+//TableName function for ParkingData
 func (pd *ParkingData) TableName() string {
 	return "parkingdata"
 }
